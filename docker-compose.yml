@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      bash -c "rm -f tmp/pids/server.pid &&
+               bundle &&
+               bundle exec rails server -b 0.0.0.0 -p 3000"
+    volumes:
+      - .:/rails
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env.development
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle && bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/rails
+      - bundle:/usr/local/bundle
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env.development
+
+volumes:
+  pgdata:
+  bundle:

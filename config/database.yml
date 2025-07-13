@@ -23,6 +23,7 @@ default: &default
 development:
   <<: *default
   database: lanes_development
+  url: <%= ENV["DATABASE_URL"] %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -57,6 +58,7 @@ development:
 test:
   <<: *default
   database: lanes_test
+  url: <%= ENV["DATABASE_URL"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,4 +84,4 @@ production:
   <<: *default
   database: lanes_production
   username: lanes
-  password: <%= ENV["LANES_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
