@@ -53,6 +53,9 @@ group :development, :test do
 
   # Unit tests
   gem "rspec-rails"
+
+  # Environment configuration
+  gem "dotenv-rails"
 end
 
 group :development do
