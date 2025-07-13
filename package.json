@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "daisyui": "^5.0.46",
+    "sortablejs": "^1.15.6"
+  }
+}
