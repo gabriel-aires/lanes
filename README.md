@@ -6,6 +6,7 @@
 - Turbo/Stimulus
 
 ```
+cp .env.sample .env.development
 docker compose build
 docker compose run web bin/rails db:setup db:seed
 docker compose up
