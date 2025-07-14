@@ -1,0 +1,26 @@
+<div class="<%= @board.color %> text-white min-h-screen flex flex-col p-6">
+  <h1 class="text-3xl font-bold mb-6"><%= @board.title %></h1>
+
+  <%= form_with model: Card.new, url: board_cards_path(@board), local: true, class:"mb-6 flex flex-col gap-3 max-w-md" do |f| %>
+    <%= f.hidden_field :lane_id, value: @board.lanes.first.id %>
+    <%= f.text_field :title, placeholder: "Card title", class:"input input-bordered input-sm" %>
+    <%= f.text_area :description, placeholder: "Description", rows: 3, class:"textarea textarea-bordered" %>
+    <%= f.submit "Create", class:"btn btn-secondary w-36" %>
+  <% end %>
+
+  <div class="flex gap-6 overflow-x-auto">
+    <% @board.lanes.each do |lane| %>
+      <%= turbo_frame_tag dom_id(lane) do %>
+        <div class="bg-base-100 shadow-xl rounded-box p-4 w-72 shrink-0">
+            <h2 class="font-bold text-lg mb-3"><%= lane.title %></h2>
+            <div id="lane_<%= lane.id %>" class="space-y-3"
+                data-controller="sortable"
+                data-lane-id="<%= lane.id %>"
+                data-sortable-url-value="<%= sort_cards_path %>">
+            <%= render lane.cards %>
+            </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

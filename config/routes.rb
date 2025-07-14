@@ -10,5 +10,12 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "boards#index"
+
+  resources :boards, only: [ :index, :show ] do
+    resources :cards, only: [ :create, :edit, :update ]
+  end
+
+  delete "cards/:id/archive", to: "cards#archive", as: :archive_card
+  patch "sort_cards", to: "cards#sort"
 end
