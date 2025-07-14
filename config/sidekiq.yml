@@ -1,0 +1,13 @@
+
+---
+:concurrency: 5
+:queues:
+  - default
+
+:scheduler:
+  :schedule:
+    delete_archived_cards:
+      cron: "0 4 * * *"        # daily at 04:00
+      class: "DeleteArchivedCardsJob"
+      queue: default
+      description: "Permanently remove archived cards"

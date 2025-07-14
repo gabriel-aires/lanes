@@ -38,7 +38,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle && bundle exec sidekiq -C config/sidekiq.yml
+    command: bash -c "bundle && bundle exec sidekiq -C config/sidekiq.yml -r /rails/config/environment.rb -q default"
     volumes:
       - .:/rails
       - bundle:/usr/local/bundle

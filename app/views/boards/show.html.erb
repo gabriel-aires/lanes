@@ -5,7 +5,7 @@
     <%= f.hidden_field :lane_id, value: @board.lanes.first.id %>
     <%= f.text_field :title, placeholder: "Card title", class:"input input-bordered input-sm" %>
     <%= f.text_area :description, placeholder: "Description", rows: 3, class:"textarea textarea-bordered" %>
-    <%= f.submit "Create", class:"btn btn-secondary w-36" %>
+    <%= f.submit "Create", class:"btn btn-primary w-36" %>
   <% end %>
 
   <div class="flex gap-6 overflow-x-auto">
