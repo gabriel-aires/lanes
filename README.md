@@ -1,24 +1,16 @@
-# README
+# Lanes - Kanban on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Rails 7.2
+- Sidekiq
+- PostgreSQL
+- Turbo/Stimulus
 
-Things you may want to cover:
+```
+docker compose build
+docker compose run web bin/rails db:setup db:seed
+docker compose up
+```
 
-* Ruby version
+<img width="1920" height="933" alt="image" src="https://github.com/user-attachments/assets/cf3db7a3-f475-4c97-9eb0-08880903e0d5" />
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
